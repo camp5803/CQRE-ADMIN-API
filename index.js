@@ -3,8 +3,8 @@ const cookieParser = require('cookie-parser');
 const hpp = require('hpp');
 const cors = require('cors');
 const helmet = require('helmet');
-
 const secret = require('./config/secret');
+
 const app = express();
 
 app.use(express.json());
@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 const server = app.listen('7908', () => {
-    const port = server.address().port;
-    console.log("server listening on port " + port);
+    const address = server.address();
+    const { port } = address;
+    console.log(`server listening on port ${port}`);
 });
