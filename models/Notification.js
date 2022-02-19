@@ -53,4 +53,4 @@ module.exports = (sequelize, DataTypes) => {
 
     Notification.associate = (db) => {};
     return Notification;
-};
+}

@@ -19,4 +19,4 @@ module.exports = (sequelize, DataTypes) => {
 
     Scrap.associate = (db) => {};
     return Scrap;
-};
+}

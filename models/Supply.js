@@ -25,4 +25,4 @@ module.exports = (sequelize, DataTypes) => {
 
     Supply.associate = (db) => {};
     return Supply;
-};
+}

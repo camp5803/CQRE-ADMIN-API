@@ -24,4 +24,4 @@ module.exports = (sequelize, DataTypes) => {
 
     ProjectMember.associate = (db) => {};
     return ProjectMember;
-};
+}

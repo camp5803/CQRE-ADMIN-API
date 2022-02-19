@@ -21,4 +21,4 @@ module.exports = (sequelize, DataTypes) => {
 
     PostHashTag.associate = (db) => {};
     return PostHashTag;
-};
+}

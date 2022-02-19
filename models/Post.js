@@ -52,4 +52,4 @@ module.exports = (sequelize, DataTypes) => {
 
     Post.associate = (db) => {};
     return Post;
-};
+}

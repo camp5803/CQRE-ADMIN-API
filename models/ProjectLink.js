@@ -21,4 +21,4 @@ module.exports = (sequelize, DataTypes) => {
 
     ProjectLink.associate = (db) => {};
     return ProjectLink;
-};
+}

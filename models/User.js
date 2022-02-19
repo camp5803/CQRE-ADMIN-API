@@ -42,4 +42,4 @@ module.exports = (sequelize, DataTypes) => {
 
     User.associate = (db) => {};
     return User;
-};
+}

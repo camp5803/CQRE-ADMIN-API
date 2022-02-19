@@ -33,4 +33,4 @@ module.exports = (sequelize, DataTypes) => {
 
     Project.associate = (db) => {};
     return Project;
-};
+}

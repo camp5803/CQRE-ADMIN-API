@@ -37,4 +37,4 @@ module.exports = (sequelize, DataTypes) => {
 
     File.associate = (db) => {};
     return File;
-};
+}
