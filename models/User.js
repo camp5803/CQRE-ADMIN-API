@@ -28,10 +28,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(10),
             allowNull: true,
             defaultValue: 'Guest'
-        },
-        profile: {
-            type: DataTypes.STRING(1000),
-            allowNull: false
         }
     }, {
         tableName: 'User',
