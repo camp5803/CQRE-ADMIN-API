@@ -7,19 +7,48 @@ const secret = require('./config/secret');
 
 const app = express();
 
+// import sequelize models
+
+const {sequelize} = require('./models');
+const UserRoutes = require('./controllers/UserRoutes');
+const BookRoutes = require('./controllers/BookRoutes');
+
+// use middlewares
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(hpp());
 app.use(helmet());
 app.use(cors(secret.corsOptions));
+// app.use(isAuthenticated());
 
-app.get('/', (req, res) => {
-    res.send("ok?");
+// routes
+
+app.use('/user', UserRoutes);
+app.use('/book', BookRoutes);
+
+// error handler
+
+app.use((req, res, next) => {
+    const err = new Error('404');
+    err.status = 404;
+    err.message = "Not found";
+    next(err);
 });
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Server error occurred",
+        err
+    });
+});
+
+sequelize.sync();
 
 const server = app.listen('7908', () => {
     const address = server.address();
-    const { port } = address;
+    const {port} = address;
     console.log(`server listening on port ${port}`);
 });
