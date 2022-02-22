@@ -10,8 +10,9 @@ const app = express();
 // import sequelize models
 
 const {sequelize} = require('./models');
-const UserRoutes = require('./controllers/UserRoutes');
-const BookRoutes = require('./controllers/BookRoutes');
+const UserRoutes = require('./routes/UserRoutes');
+const BookRoutes = require('./routes/BookRoutes');
+const RentalRoutes = require('./routes/RentalRoutes')
 
 // use middlewares
 
@@ -27,6 +28,7 @@ app.use(cors(secret.corsOptions));
 
 app.use('/user', UserRoutes);
 app.use('/book', BookRoutes);
+app.use('/rental', RentalRoutes);
 
 // error handler
 
