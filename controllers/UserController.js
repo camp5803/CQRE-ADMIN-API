@@ -39,8 +39,8 @@ const deleteUserInformation = async (req, res) => {
 }
 
 module.exports = {
-    getUserInformation,
-    getAllUserInformation,
-    updateUserInformation,
-    deleteUserInformation
+    read: getUserInformation,
+    readAll: getAllUserInformation,
+    update: updateUserInformation,
+    destroy: deleteUserInformation
 }

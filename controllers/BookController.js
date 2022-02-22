@@ -1,6 +1,6 @@
 const { Book } = require('../models');
 
-const getBookInformation = async (req, res) => {
+const getAllBookInformation = async (req, res) => {
     const data = await Book.findAll({
         raw: true,
         /*
@@ -44,8 +44,8 @@ const deleteBookInformation = async (req, res) => {
 }
 
 module.exports = {
-    getBookInformation,
-    createBookInformation,
-    updateBookInformation,
-    deleteBookInformation
+    read: getAllBookInformation,
+    create: createBookInformation,
+    update: updateBookInformation,
+    destroy: deleteBookInformation
 }
