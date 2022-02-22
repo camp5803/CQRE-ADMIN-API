@@ -2,6 +2,14 @@
 
 # crontab 0 9 * * * /home/ubuntu/admin-server/lib/delinquent.sh
 
+backup="crontab.bak"
+
+if [ ! -e $backup ];
+then
+  touch $backup
+  echo "crontab 0 9 * * * /home/ubuntu/admin-server/lib/delinquent.sh" >> $backup
+fi
+
 # shellcheck disable=SC2164
 cd /home/ubuntu/admin-server/lib
 
