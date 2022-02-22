@@ -1,12 +1,12 @@
 const express = require('express');
 const wrap = require('../wrapper');
-const { getBookInformation, deleteBookInformation, createBookInformation, updateBookInformation } = require('../services/BookService');
+const { read, destroy, create, update } = require('../controllers/BookController');
 
 const router = express.Router();
 
-router.get('/', getBookInformation);
-router.post('/', createBookInformation);
-router.patch('/:bid', updateBookInformation);
-router.delete('/:bid', deleteBookInformation);
+router.get('/', wrap(read));
+router.post('/', wrap(create));
+router.patch('/:bid', wrap(update));
+router.delete('/:bid', wrap(destroy));
 
 module.exports = router;
