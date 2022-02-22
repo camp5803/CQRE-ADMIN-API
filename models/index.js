@@ -12,6 +12,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 // define tables
 db.Book = require('./Book')(sequelize, Sequelize);
 db.Comment = require('./Comment')(sequelize, Sequelize);
+db.Delinquent = require('./Delinquent')(sequelize, Sequelize);
 db.File = require('./File')(sequelize, Sequelize);
 db.HashTag = require('./HashTag')(sequelize, Sequelize);
 db.Notification = require('./Notification')(sequelize, Sequelize);
@@ -37,21 +38,23 @@ db.Post.hasMany(db.Scrap, { foreignKey: 'post_id', sourceKey: 'post_id' });
 db.Project.hasMany(db.ProjectLink, { foreignKey: 'project_id', sourceKey: 'project_id' });
 db.Project.hasMany(db.ProjectMember, { foreignKey: 'project_id', sourceKey: 'project_id' });
 db.User.hasMany(db.Comment, { foreignKey: 'author_id', sourceKey: 'user_id' });
+db.User.hasOne(db.Delinquent, { foreignKey: 'user_id', sourceKey: 'user_id' });
 db.User.hasMany(db.Post, { foreignKey: 'author_id', sourceKey: 'user_id' });
 db.User.hasMany(db.ProjectMember, { foreignKey: 'member_id', sourceKey: 'user_id' });
 db.User.hasMany(db.Scrap, { foreignKey: 'user_id', sourceKey: 'user_id' });
 
 // belongs
 
-db.PostHashTag.belongsTo(db.HashTag, { foreignKey: 'hashtag_id', targetKey: 'hashtag_id' });
 db.Comment.belongsTo(db.Post, { foreignKey: 'post_id', targetKey: 'post_id' });
+db.Comment.belongsTo(db.User, { foreignKey: 'author_id', targetKey: 'user_id' });
+db.Delinquent.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
+db.Post.belongsTo(db.User, { foreignKey: 'author_id', targetKey: 'user_id' });
+db.PostHashTag.belongsTo(db.HashTag, { foreignKey: 'hashtag_id', targetKey: 'hashtag_id' });
 db.PostHashTag.belongsTo(db.Post, { foreignKey: 'post_id', targetKey: 'post_id' });
-db.Scrap.belongsTo(db.Post, { foreignKey: 'post_id', targetKey: 'post_id' });
 db.ProjectLink.belongsTo(db.Project, { foreignKey: 'project_id', targetKey: 'project_id' });
 db.ProjectMember.belongsTo(db.Project, { foreignKey: 'project_id', targetKey: 'project_id' });
-db.Comment.belongsTo(db.User, { foreignKey: 'author_id', targetKey: 'user_id' });
-db.Post.belongsTo(db.User, { foreignKey: 'author_id', targetKey: 'user_id' });
 db.ProjectMember.belongsTo(db.User, { foreignKey: 'member_id', targetKey: 'user_id' });
+db.Scrap.belongsTo(db.Post, { foreignKey: 'post_id', targetKey: 'post_id' });
 db.Scrap.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'user_id' });
 
 // will be modified
