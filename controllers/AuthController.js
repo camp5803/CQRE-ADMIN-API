@@ -43,21 +43,33 @@ const access = (req, res, next) => {
     })(req, res, next);
 }
 
-const isAuthenticated = async (req, res) => {
+const isAuthenticated = async (req, res, next) => {
     return passport.authenticate('jwt', { session: false }, (err, user) => {
         if (user) {
-            return res.json({ status: true });
+            next();
         } else {
             return res.status(401).json({
                 status: "error",
                 message: "Login failed (JWTStrategy#2)"
             });
         }
-    })(req, res);
+    })(req, res, next);
+}
+
+const isAdmin = (req, res, next) => {
+    if (req.user.user_type === "Admin") {
+        next();
+    }  else {
+        return res.status(403).json({
+            status: "error",
+            message: "You are not an administrator"
+        });
+    }
 }
 
 module.exports = {
     create,
     access,
-    isAuthenticated
+    isAuthenticated,
+    isAdmin
 }
