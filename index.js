@@ -3,7 +3,12 @@ const cookieParser = require('cookie-parser');
 const hpp = require('hpp');
 const cors = require('cors');
 const helmet = require('helmet');
+const passport = require('passport')
+
+// configs
+
 const secret = require('./config/secret');
+const passportConfig = require('./config/passport');
 
 const app = express();
 
@@ -12,7 +17,9 @@ const app = express();
 const {sequelize} = require('./models');
 const UserRoutes = require('./routes/UserRoutes');
 const BookRoutes = require('./routes/BookRoutes');
-const RentalRoutes = require('./routes/RentalRoutes')
+const RentalRoutes = require('./routes/RentalRoutes');
+// const LoginRoutes = require('./routes/LoginRoutes');
+const AuthRoutes = require('./routes/AuthRoutes');
 
 // use middlewares
 
@@ -22,13 +29,17 @@ app.use(cookieParser());
 app.use(hpp());
 app.use(helmet());
 app.use(cors(secret.corsOptions));
-// app.use(isAuthenticated());
+app.use(passport.initialize());
+
+passportConfig();
 
 // routes
 
 app.use('/user', UserRoutes);
 app.use('/book', BookRoutes);
 app.use('/rental', RentalRoutes);
+// app.use('/login', LoginRoutes);
+app.use('/auth', AuthRoutes);
 
 // error handler
 
