@@ -1,6 +1,5 @@
 const passport = require('passport');
 const jwt = require('../config/jwt');
-const { map } = require('../fp');
 
 const create = async (req, res) => {
     return passport.authenticate('local', { session: false }, async (err, user) => {
@@ -17,10 +16,9 @@ const create = async (req, res) => {
                     message: "Login failed (LocalStrategy#2)"
                 });
             }
-            const data = map(a => a.toJSON(), user);
+            const data = user.toJSON();
             delete data.password;
-            const accessToken = await jwt.sign(data);
-            console.log(accessToken);
+            const accessToken = jwt.sign(data);
 
             return res.json({
                 status: "success",
@@ -45,7 +43,7 @@ const access = (req, res, next) => {
     })(req, res, next);
 }
 
-const isAuthenticated = (req, res) => {
+const isAuthenticated = async (req, res) => {
     return passport.authenticate('jwt', { session: false }, (err, user) => {
         if (user) {
             return res.json({ status: true });
@@ -63,13 +61,3 @@ module.exports = {
     access,
     isAuthenticated
 }
-
-/*
-* const password = await bcrypt.hashSync(req.body.password, 10);
-        const data = await User.findOne({
-            where: {
-                email: req.body.email,
-                password
-            }
-        });
-* */
