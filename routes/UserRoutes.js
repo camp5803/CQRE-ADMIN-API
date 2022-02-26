@@ -1,11 +1,12 @@
 const express = require("express");
 const wrap = require('../wrapper');
 const { read, readAll, update, destroy } = require('../controllers/UserController');
-const { isAuthenticated } = require('../controllers/AuthController');
+const { isAuthenticated, isAdmin } = require('../controllers/AuthController');
 
 const router = express.Router();
 
 router.use(isAuthenticated);
+router.use(isAdmin);
 
 router.get('/', wrap(readAll));
 router.get('/:uid', wrap(read));

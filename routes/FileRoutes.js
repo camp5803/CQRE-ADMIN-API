@@ -1,8 +1,12 @@
 const express = require('express');
 const wrap = require('../wrapper');
 const { File } = require('../models');
+const { isAuthenticated, isAdmin } = require('../controllers/AuthController');
 
 const router = express.Router();
+
+router.use(isAuthenticated);
+router.use(isAdmin);
 
 router.delete('/:fid', async (req, res) => {
     const data = await File.findOne({
