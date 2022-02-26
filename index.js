@@ -20,6 +20,7 @@ const BookRoutes = require('./routes/BookRoutes');
 const RentalRoutes = require('./routes/RentalRoutes');
 // const LoginRoutes = require('./routes/LoginRoutes');
 const AuthRoutes = require('./routes/AuthRoutes');
+const FileRoutes = require('./routes/FileRoutes');
 
 // use middlewares
 
@@ -40,6 +41,7 @@ app.use('/book', BookRoutes);
 app.use('/rental', RentalRoutes);
 // app.use('/login', LoginRoutes);
 app.use('/auth', AuthRoutes);
+app.use('/file', FileRoutes);
 
 // error handler
 
