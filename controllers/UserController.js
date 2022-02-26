@@ -7,7 +7,7 @@ const getUserInformation = async (req, res) => {
         raw: true
     });
 
-    return res.json({ success: true, user });
+    return res.json({ status: "success", user });
 }
 
 const getAllUserInformation = async (req, res) => {
@@ -18,8 +18,9 @@ const getAllUserInformation = async (req, res) => {
         limit: 20, offset: 20 * (req.params.page - 1)
         */
     });
+    console.log("test");
 
-    return res.json({ success: true, user });
+    return res.json({ status: "success", user });
 }
 
 const updateUserInformation = async (req, res) => {
@@ -27,7 +28,7 @@ const updateUserInformation = async (req, res) => {
         where: { user_id: req.params.uid }
     });
 
-    return res.json({ success: true });
+    return res.json({ status: "success" });
 }
 
 const deleteUserInformation = async (req, res) => {
@@ -44,7 +45,7 @@ const deleteUserInformation = async (req, res) => {
         await User.destroy({
             where: { user_id: req.params.uid }
         });
-        return res.json({ success: true });
+        return res.json({ status: "success" });
     }
 }
 
