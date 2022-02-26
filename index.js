@@ -21,6 +21,8 @@ const RentalRoutes = require('./routes/RentalRoutes');
 // const LoginRoutes = require('./routes/LoginRoutes');
 const AuthRoutes = require('./routes/AuthRoutes');
 const FileRoutes = require('./routes/FileRoutes');
+const ProjectRoutes = require('./routes/ProjectRoutes');
+const NotificationRoutes = require('./routes/NotificationRoutes');
 
 // use middlewares
 
@@ -42,6 +44,8 @@ app.use('/rental', RentalRoutes);
 // app.use('/login', LoginRoutes);
 app.use('/auth', AuthRoutes);
 app.use('/file', FileRoutes);
+app.use('/project', ProjectRoutes);
+app.use('/notification', NotificationRoutes);
 
 // error handler
 
