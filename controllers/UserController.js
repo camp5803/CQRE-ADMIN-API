@@ -18,7 +18,6 @@ const getAllUserInformation = async (req, res) => {
         limit: 20, offset: 20 * (req.params.page - 1)
         */
     });
-    console.log("test");
 
     return res.json({ status: "success", user });
 }
