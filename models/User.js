@@ -25,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         user_type: {
-            type: DataTypes.STRING(10),
+            type: DataTypes.STRING(20),
             allowNull: true,
-            defaultValue: 'Guest'
+            defaultValue: 'ROLE_GUEST'
         }
     }, {
         tableName: 'User',
