@@ -5,15 +5,25 @@ const deletePost = async (req, res) => {
         where: { post_id: req.params.pid }
     });
 
-    return res.json({ success: true });
+    return res.json({ status: "success" });
 }
 
 const deleteComment = async (req, res) => {
-    await Comment.destroy({
+    const data = await Comment.findOne({
         where: { comment_id: req.params.cid }
     });
 
-    return res.json({ success: true });
+    if (data === null) {
+        return res.status(400).json({
+            status: "error",
+            message: "Content not found in this parameter."
+        });
+    } else {
+        await Comment.destroy({
+            where: { comment_id: req.params.cid }
+        });
+        return res.json({ status: "success" });
+    }
 }
 
 module.exports = {

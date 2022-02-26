@@ -5,7 +5,7 @@ const getDelinquents = async (req, res) => {
         raw: true
     });
 
-    return res.json(data);
+    return res.json({ status: "success", data });
 }
 
 module.exports = {

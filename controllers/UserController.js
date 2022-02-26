@@ -31,11 +31,21 @@ const updateUserInformation = async (req, res) => {
 }
 
 const deleteUserInformation = async (req, res) => {
-    await User.destroy({
+    const data = await User.findOne({
         where: { user_id: req.params.uid }
     });
 
-    return res.json({ success: true });
+    if (data === null) {
+        return res.status(400).json({
+            status: "error",
+            message: "Content not found in this parameter."
+        });
+    } else {
+        await User.destroy({
+            where: { user_id: req.params.uid }
+        });
+        return res.json({ success: true });
+    }
 }
 
 module.exports = {

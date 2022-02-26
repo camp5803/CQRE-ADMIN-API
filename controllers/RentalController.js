@@ -18,7 +18,7 @@ const returnBook = async (req, res) => {
         where: { user_id: req.params.uid }
     });
 
-    return res.json({ success: true });
+    return res.json({ status: "success" });
 }
 
 module.exports = returnBook;

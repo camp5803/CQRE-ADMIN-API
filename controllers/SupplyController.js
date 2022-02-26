@@ -8,13 +8,13 @@ const getSupplyInformation = async (req, res) => {
         */
     });
 
-    return res.json({ success: true, data });
+    return res.json({ status: "success", data });
 }
 
 const createSupplyInformation = async (req, res) => {
     await Supply.create(req.body);
 
-    return res.json({ success: true });
+    return res.json({ status: "success" });
 }
 
 const updateSupplyInformation = async (req, res) => {
@@ -22,13 +22,23 @@ const updateSupplyInformation = async (req, res) => {
         where: { supply: req.params.sid }
     });
 
-    return res.json({ success: true });
+    return res.json({ status: "success" });
 }
 
 const deleteSupplyInformation = async (req, res) => {
-    await Supply.destroy({ where: { supply: req.params.sid }});
+    const data = await Supply.findOne({
+        where: { supply: req.params.sid }
+    });
 
-    return res.json({ success: true });
+    if (data === null) {
+        return res.status(400).json({
+            status: "error",
+            message: "Content not found in this parameter."
+        });
+    } else {
+        await Supply.destroy({ where: { supply: req.params.sid }});
+        return res.json({ status: "success" });
+    }
 }
 
 module.exports = {
